@@ -1,0 +1,1 @@
+all = ['shopping_basket']
