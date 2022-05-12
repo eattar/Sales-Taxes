@@ -1,6 +1,5 @@
 import unittest
-from shopping_basket import ShoppingBasket
-
+from sales_taxes.shopping_basket import ShoppingBasket
 
 class TestShoppingBasket(unittest.TestCase):
     """ ShoppingBasket class tests. """
