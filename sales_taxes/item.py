@@ -13,9 +13,9 @@ class Item:
     unit_tax: float = None
 
 
-def find_item_tax(item):
+def find_item_tax(name) -> float:
 
-    if item in ['book', 'chocolate bar', 'packet of headache pills', 'box of chocolates']:
+    if name in ['book', 'chocolate bar', 'packet of headache pills', 'box of chocolates']:
         return 0
     else:
         return 0.10
