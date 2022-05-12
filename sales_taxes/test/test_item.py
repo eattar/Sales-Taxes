@@ -13,8 +13,13 @@ class TestItem(unittest.TestCase):
         self.assertIsInstance(item.unit_price, float)
         self.assertIsInstance(item.quantity, int)
 
-    # def test_item_quantity_greater_than_one(self):
-    #     """Item quantity cannot be negative or zero"""
-    #     item = Item('book', 12.99, 0)
-    #
-    #     self.assertRaises(ValueError, item.quantity)
+    def test_check_item_quantity_is_greater_than_zero(self):
+        """Raises ValueError if item quantity is less or equal to zero """
+        with self.assertRaises(ValueError):
+            Item('book', 13.69, 0)
+            Item('book', 13.69, -1)
+
+    def test_raising_type_error_if_quantity_type_not_integer(self):
+        """Raises TypeError if item quantity type is not Integer"""
+        with self.assertRaises(TypeError):
+            Item('book', 14.99, 0.5)
