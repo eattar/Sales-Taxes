@@ -4,24 +4,30 @@ from sales_taxes.round_up_to_nearest_05 import roundup_nearest_05
 
 
 def main():
-
+    """prints out receipt details of a shopping basket"""
     shopping_basket = ShoppingBasket()
 
+    print("\n[q] SHOW RESULTS")
     while True:
 
-        line_item = input("Enter: ")
+        line_item = input("Add Item: ")
 
-        if line_item == 'y':
+        if line_item == 'q':
             break
 
-        item = parse_input_line(line_item)
+        try:
+            item = parse_input_line(line_item)
+            shopping_basket.add_items(item)
+        except Exception as error:
+            print(error)
+            continue
 
-        shopping_basket.add_items(item)
+    print("\n")
 
     for item in shopping_basket.items:
-        print(f'{item.quantity} {"imported" if item.imported else ""} {item.name}: {round(item.price, 2)}')
-    print(f'Sales taxes: {roundup_nearest_05(shopping_basket.total_sales_taxes()):.2f}')
-    print(f'Total: {round(shopping_basket.total_price(), 2):.2f}')
+        print(item)
+    print(f'Sales Taxes: {roundup_nearest_05(shopping_basket.total_sales_taxes()):.2f}')
+    print(f'Total: {round(shopping_basket.total_price(), 2):.2f}\n')
 
 
 if __name__ == '__main__':

@@ -1,6 +1,6 @@
 import unittest
 
-from sales_taxes.item import Item, find_item_unit_tax_rate, parse_input_line
+from sales_taxes.item import Item, parse_input_line
 
 
 class TestItem(unittest.TestCase):

@@ -24,11 +24,11 @@ class TestShoppingBasket(unittest.TestCase):
         self.assertIn(item1, self.shopping_basket.items)
         self.assertIn(item2, self.shopping_basket.items)
 
-    def test_total_amount(self):
+    def test_total_price_of_shopping_basket(self):
         self.shopping_basket.add_items(Item('book', 12.99, 1))
         self.assertEqual(self.shopping_basket.total_price(), 12.99)
 
-    def test_total_sales_taxes(self):
+    def test_total_sales_taxes_of_shopping_basket(self):
         item = Item('music CD', 15.49, 2)
         self.shopping_basket.add_items(item)
         self.assertEqual(self.shopping_basket.total_sales_taxes(), 3.10)

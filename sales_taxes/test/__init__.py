@@ -1,1 +1,1 @@
-all = ['test_shopping_basket']
+__all__ = ['test_shopping_basket', 'test_item']

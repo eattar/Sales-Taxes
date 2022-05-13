@@ -1,22 +1,26 @@
+from sales_taxes.round_up_to_nearest_05 import roundup_nearest_05
 
 
 class Item:
     """ class for items added to shopping basket"""
     def __init__(self, name: str, unit_price: float, quantity: int, imported: bool = False,
-                 unit_tax_rate: float = None, tax: float = None, price: float = None) -> None:
-        self.name = name
+                 unit_tax_rate: float = 0, tax: float = 0, price: float = 0) -> None:
+        if not isinstance(name, str):
+            raise TypeError("Item name must be a string!")
+        else:
+            self.name = name
 
         if unit_price <= 0:
-            raise ValueError("Item unit price cannot be equal or less than zero")
+            raise ValueError("Item unit price cannot be equal or less than zero!")
         elif not isinstance(unit_price, float):
-            raise TypeError("Item unit price should be a float")
+            raise TypeError("Item unit price must be a float!")
         else:
             self.unit_price = unit_price
 
         if quantity <= 0:
-            raise ValueError("Item quantity cannot be equal or less than zero")
+            raise ValueError("Item quantity cannot be equal or less than zero!")
         elif not isinstance(quantity, int):
-            raise TypeError("Item quantity must be an integer")
+            raise TypeError("Item quantity must be an integer!")
         else:
             self.quantity = quantity
 
@@ -24,6 +28,10 @@ class Item:
         self.price = price
         self.unit_tax_rate = unit_tax_rate
         self.tax = tax
+
+    def __str__(self):
+        return f'{self.quantity}{" imported" if self.imported else ""} ' \
+               f'{self.name}: {(self.price + roundup_nearest_05(self.tax)):.2f}'
 
 
 def parse_input_line(line_item) -> Item:
