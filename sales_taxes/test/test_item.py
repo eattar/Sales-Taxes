@@ -1,6 +1,6 @@
 import unittest
 
-from sales_taxes.item import Item, find_item_tax
+from sales_taxes.item import Item, find_item_unit_tax_rate, parse_input_line
 
 
 class TestItem(unittest.TestCase):
@@ -23,3 +23,24 @@ class TestItem(unittest.TestCase):
         """Raises TypeError if item quantity type is not Integer"""
         with self.assertRaises(TypeError):
             Item('book', 14.99, 0.5)
+
+    def test_parsed_line_item_is_valid(self):
+        """Check parsed item has correct types"""
+        line_item = '1 music CD at 16.49'
+        item = parse_input_line(line_item)
+
+        self.assertEqual(item.name, 'music CD')
+        self.assertEqual(item.quantity, 1)
+        self.assertEqual(item.unit_price, 16.49)
+        self.assertEqual(item.imported, False)
+
+    def test_parsed_disordered_line_is_valid(self):
+
+        line_item = '1 box of imported chocolates at 11.25'
+        item = parse_input_line(line_item)
+
+        self.assertEqual(item.name, 'box of chocolates')
+        self.assertEqual(item.quantity, 1)
+        self.assertEqual(item.unit_price, 11.25)
+        self.assertEqual(item.imported, True)
+

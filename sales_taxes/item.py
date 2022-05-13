@@ -2,8 +2,8 @@
 
 class Item:
     """ class for items added to shopping basket"""
-    def __init__(self, name: str, unit_price: float, quantity: int, imported: bool = False, total_price: float = None,
-                 unit_tax: float = None) -> None:
+    def __init__(self, name: str, unit_price: float, quantity: int, imported: bool = False,
+                 unit_tax_rate: float = None, tax: float = None, price: float = None) -> None:
         self.name = name
 
         if unit_price <= 0:
@@ -21,11 +21,29 @@ class Item:
             self.quantity = quantity
 
         self.imported = imported
-        self.total_price = total_price
-        self.unit_tax = unit_tax
+        self.price = price
+        self.unit_tax_rate = unit_tax_rate
+        self.tax = tax
 
 
-def find_item_tax(name) -> float:
+def parse_input_line(line_item) -> Item:
+    split_line_item = line_item.split()
+    # item unit price and quantity cannot be less than or equal to zero
+    item_quantity = int(split_line_item[0])
+    item_unit_price = float(split_line_item[-1])
+
+    if 'imported' in split_line_item:
+        item_name = split_line_item[1:-2]
+        item_name.remove('imported')
+        item_name = ' '.join(item_name)
+        return Item(item_name, item_unit_price, item_quantity, True)
+    else:
+        item_name = split_line_item[1:-2]
+        item_name = ' '.join(item_name)
+        return Item(item_name, item_unit_price, item_quantity)
+
+
+def find_item_unit_tax_rate(name) -> float:
 
     if name in ['book', 'chocolate bar', 'packet of headache pills', 'box of chocolates']:
         return 0
