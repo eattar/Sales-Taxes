@@ -1,29 +1,20 @@
 from sales_taxes.round_up_to_nearest_05 import roundup_nearest_05
 
 
+INVALID_INPUT = """Invalid input! Follow this pattern:
+                 [Item Quantity] imported[optional] [Item Name] at [Item Price]
+                 Example: 1 imported box of chocolates at 10.00  
+                 Example: 1 music CD at 14.99"""
+
+
 class Item:
     """ class for items added to shopping basket"""
     def __init__(self, name: str, unit_price: float, quantity: int, imported: bool = False,
                  unit_tax_rate: float = 0, tax: float = 0, price: float = 0) -> None:
-        if not isinstance(name, str):
-            raise TypeError("Item name must be a string!")
-        else:
-            self.name = name
 
-        if unit_price <= 0:
-            raise ValueError("Item unit price cannot be equal or less than zero!")
-        elif not isinstance(unit_price, float):
-            raise TypeError("Item unit price must be a float!")
-        else:
-            self.unit_price = unit_price
-
-        if quantity <= 0:
-            raise ValueError("Item quantity cannot be equal or less than zero!")
-        elif not isinstance(quantity, int):
-            raise TypeError("Item quantity must be an integer!")
-        else:
-            self.quantity = quantity
-
+        self.name = name
+        self.unit_price = unit_price
+        self.quantity = quantity
         self.imported = imported
         self.price = price
         self.unit_tax_rate = unit_tax_rate
@@ -35,10 +26,30 @@ class Item:
 
 
 def parse_input_line(line_item) -> Item:
+
     split_line_item = line_item.split()
-    # item unit price and quantity cannot be less than or equal to zero
-    item_quantity = int(split_line_item[0])
-    item_unit_price = float(split_line_item[-1])
+
+    if len(split_line_item) < 4:
+        raise ValueError(INVALID_INPUT)
+    if not split_line_item[-2] == 'at':
+        raise ValueError(INVALID_INPUT)
+
+    item_name = ' '.join(split_line_item[1:-2])
+    if item_name.isdigit():
+        raise TypeError("Invalid input! Item name must be string!")
+
+    try:
+        item_quantity = int(split_line_item[0])
+    except ValueError:
+        raise ValueError("Item quantity must be an integer!")
+
+    if item_quantity <= 0:
+        raise ValueError("Item quantity must be greater than zero")
+
+    try:
+        item_unit_price = float(split_line_item[-1])
+    except ValueError:
+        raise ValueError("Invalid input! Item quantity must be a digit!")
 
     if 'imported' in split_line_item:
         item_name = split_line_item[1:-2]

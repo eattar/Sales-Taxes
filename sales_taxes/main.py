@@ -18,6 +18,7 @@ def main():
         try:
             item = parse_input_line(line_item)
             shopping_basket.add_items(item)
+            print('Added to basket!')
         except Exception as error:
             print(error)
             continue
