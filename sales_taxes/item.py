@@ -49,7 +49,9 @@ def parse_input_line(line_item) -> Item:
     try:
         item_unit_price = float(split_line_item[-1])
     except ValueError:
-        raise ValueError("Invalid input! Item quantity must be a digit!")
+        raise ValueError("Invalid input! Item unit price must be a digit!")
+    if item_unit_price <= 0:
+        raise ValueError("Invalid input! Item unit price must not be equal or less than zero!")
 
     if 'imported' in split_line_item:
         item_name = split_line_item[1:-2]

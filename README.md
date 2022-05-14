@@ -5,7 +5,7 @@ This app was created as a result of an assessment test for _itemis_ company.
 + Calculates sales taxes and total price from parsed lines
 + Prints out a receipt details from input values
 ## Requirements
-This app was implemented in [python3](https://www.python.org/), and you can run it from Command-line. Make sure python 3 and [pip3](https://pypi.org/project/pip/) are installed 
+This app was implemented in [python3](https://www.python.org/), and you can run it from command-line. Make sure [python3](https://www.python.org/) and [pip3](https://pypi.org/project/pip/) are installed 
 on your system.
 ### Installation
 

@@ -60,6 +60,12 @@ class TestItem(unittest.TestCase):
         with self.assertRaises(ValueError):
             parse_input_line('1 book at a')
 
+    def test_parsed_line_item_unit_price_is_greater_than_zero(self):
+        """Checks parsed line item unit price if it is a float"""
+        with self.assertRaises(ValueError):
+            parse_input_line('1 book at 0')
+            parse_input_line('1 book at -1')
+
     def test_parsed_disordered_line_is_valid(self):
 
         line_item = '1 box of imported chocolates at 11.25'
