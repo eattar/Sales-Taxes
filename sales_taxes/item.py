@@ -20,12 +20,12 @@ class Item:
         self.unit_tax_rate = unit_tax_rate
         self.tax = tax
 
-    def __str__(self):
+    def __str__(self) -> str:
         return f'{self.quantity}{" imported" if self.imported else ""} ' \
                f'{self.name}: {(self.price + roundup_nearest_05(self.tax)):.2f}'
 
 
-def parse_input_line(line_item) -> Item:
+def parse_input_line(line_item: str) -> Item:
 
     split_line_item = line_item.split()
 
@@ -64,9 +64,9 @@ def parse_input_line(line_item) -> Item:
         return Item(item_name, item_unit_price, item_quantity)
 
 
-def find_item_unit_tax_rate(name) -> float:
+def find_item_unit_tax_rate(name: str) -> float:
 
-    if name in ['book', 'chocolate bar', 'packet of headache pills', 'box of chocolates']:
+    if name in ['book', 'box of chocolates', 'chocolate bar', 'packet of headache pills']:
         return 0
     else:
         return 0.10

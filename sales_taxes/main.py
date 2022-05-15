@@ -7,7 +7,7 @@ def main():
     """prints out receipt details of a shopping basket"""
     shopping_basket = ShoppingBasket()
 
-    print("\n[q] SHOW RESULTS")
+    print("\n[q] SHOW RESULTS\n")
     while True:
 
         line_item = input("Add Item: ")
