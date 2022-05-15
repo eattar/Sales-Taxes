@@ -4,9 +4,7 @@ from sales_taxes.round_up_to_nearest_05 import roundup_nearest_05
 
 
 class ShoppingBasket:
-    """
 
-    """
     def __init__(self) -> None:
         self.items: List[Item] = []
         self.items_sales_taxes: float = 0

@@ -1,5 +1,4 @@
 import unittest
-from os import path
 from sales_taxes.item import Item, parse_input_line
 
 
@@ -74,9 +73,3 @@ class TestItem(unittest.TestCase):
         self.assertEqual(item.quantity, 1)
         self.assertEqual(item.unit_price, 11.25)
         self.assertEqual(item.imported, True)
-
-
-class FindItemTaxRate(unittest.TestCase):
-
-    def test_find_item_is_in_tax_products_db(self):
-        pass
